@@ -26,6 +26,9 @@ import { Sale } from './schemas/sale.schema';
         entities: [User, Product, Sale],
         synchronize: configService.get<string>('NODE_ENV') !== 'production',
         logging: configService.get<string>('NODE_ENV') === 'development',
+        ssl: configService.get<string>('DB_SSL') === 'true' ? {
+          rejectUnauthorized: false,
+        } : false,
       }),
       inject: [ConfigService],
     }),
