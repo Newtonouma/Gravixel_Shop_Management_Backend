@@ -24,7 +24,7 @@ import { Sale } from './schemas/sale.schema';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE', 'gravixel_shop'),
         entities: [User, Product, Sale],
-        synchronize: configService.get<string>('NODE_ENV') !== 'production',
+        synchronize: true, // Set to true for initial deployment to create tables
         logging: configService.get<string>('NODE_ENV') === 'development',
         ssl: configService.get<string>('DB_SSL') === 'true' ? {
           rejectUnauthorized: false,
