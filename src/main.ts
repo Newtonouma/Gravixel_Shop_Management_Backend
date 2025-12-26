@@ -8,8 +8,12 @@ async function bootstrap() {
   // Enable CORS with environment variable support
   const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
   app.enableCors({
-    origin: corsOrigin.split(','), // Support multiple origins separated by comma
+    origin: corsOrigin.split(',').map(origin => origin.trim()), // Support multiple origins separated by comma
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    exposedHeaders: ['Authorization'],
+    maxAge: 3600,
   });
   
   app.useGlobalPipes(new ValidationPipe({
